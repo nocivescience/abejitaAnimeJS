@@ -1,17 +1,23 @@
 const path = anime.path('#path');
-
+let valor = 0;
+const pasosPruebaElement = document.querySelector('#pasosPrueba');
+pasosPruebaElement.addEventListener('input', (event) => {
+    valor = event.target.value;
+});
 const timeline = anime.timeline({
   easing: 'easeInOutExpo',
   duration: 1000,
   complete: () => {
-    anime({
-      targets: '.leaf',
-      rotate: 40,
-      duration: 3000,
-      loop: true,
-      direction: 'alternate',
-      easing: 'easeInOutQuad'
-    });
+    setInterval(() => {
+        anime({
+            targets: '.leaf',
+            rotate: valor,
+            duration: 3000,
+            loop: true,
+            direction: 'alternate',
+            easing: 'easeInOutQuad'
+          });
+    }, 1000);
     anime({
       targets: '.petals',
       scale: 1.05,
@@ -43,12 +49,12 @@ timeline.add({
 }, '-=750');
 
 
-anime({
-  targets: '#bee',
-  translateX: path('x'),
-  translateY: path('y'),
-  rotate: path('angle'),
-  loop: true,
-  duration: 12500,
-  easing: 'linear'
-});
+setInterval(() => {
+  anime({
+    targets: '#bee',
+    translateX: valor,
+    duration: 3000,
+    direction: 'alternate',
+    easing: 'easeInOutQuad'
+  });
+})
